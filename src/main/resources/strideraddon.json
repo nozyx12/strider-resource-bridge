@@ -1,0 +1,14 @@
+{
+  "id": "${id}",
+  "name": "strider-resource-bridge",
+  "version": "${version}",
+  "description": "An addon connecting Minecraft resource system with StriderLoader addons resources.",
+  "author": "nozyx12",
+  "side": "common",
+  "addonClass": "dev.nozyx.strider.resourcebridge.StriderResourceBridge",
+  "dependencies": {
+    "striderloader": "${loader_version_range}",
+    "minecraft": "=${mc_version}",
+    "java": "<=${java_version}"
+  }
+}

@@ -1,0 +1,55 @@
+plugins {
+    id "java"
+    id "net.fabricmc.fabric-loom" version "1.17-SNAPSHOT"
+}
+
+ext {
+    loader_version = "1.1.0"
+    minecraft_version = "26.1"
+    java_version = 25
+}
+
+def loader_major_version = loader_version.tokenize(".")[0].toInteger()
+def next_major_version = loader_major_version + 1
+
+def loader_version_range = ">=${loader_version} <${next_major_version}.0.0"
+
+group = "dev.nozyx.strider"
+version = "1.0.0"
+
+repositories {
+    mavenCentral()
+
+    maven {
+        name "nozyx"
+        url "https://maven.nozyx.dev/"
+    }
+}
+
+dependencies {
+    implementation "dev.nozyx.strider:striderloader:${project.ext.loader_version}"
+
+    minecraft "com.mojang:minecraft:${project.ext.minecraft_version}"
+}
+
+tasks.withType(AbstractArchiveTask).configureEach {
+    archiveFileName = "${rootProject.name}-${version}+mc${minecraft_version}.${archiveExtension.get()}"
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(java_version))
+    }
+}
+
+processResources {
+    filesMatching("strideraddon.json") {
+        expand(
+                id: rootProject.name,
+                version: version,
+                loader_version_range: loader_version_range,
+                mc_version: minecraft_version,
+                java_version: java_version
+        )
+    }
+}
