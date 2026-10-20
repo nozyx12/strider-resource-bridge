@@ -1,0 +1,12 @@
+pluginManagement {
+    repositories {
+        maven {
+            name = "nozyx"
+            url = "https://maven.nozyx.dev/"
+        }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = "strider-resource-bridge"

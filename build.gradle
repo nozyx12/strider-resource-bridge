@@ -1,0 +1,19 @@
+plugins {
+    id "dev.nozyx.strider.saddle" version "1.0.0"
+}
+
+saddle {
+    loaderVersion = "1.3.0"
+    minecraftVersion = "26.1"
+    minecraftSide = "common"
+    javaVersion = 25
+}
+
+group = "dev.nozyx.strider"
+version = "1.0.0"
+
+repositories {
+}
+
+dependencies {
+}
