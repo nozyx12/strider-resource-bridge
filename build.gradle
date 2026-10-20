@@ -4,7 +4,7 @@ plugins {
 
 saddle {
     loaderVersion = "1.3.0"
-    minecraftVersion = "26.2"
+    minecraftVersion = "26.3"
     minecraftSide = "common"
     javaVersion = 25
 }

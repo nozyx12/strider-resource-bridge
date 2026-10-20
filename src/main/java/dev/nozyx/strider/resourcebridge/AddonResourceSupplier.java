@@ -20,11 +20,13 @@
 package dev.nozyx.strider.resourcebridge;
 
 import net.minecraft.server.packs.PackLocationInfo;
+import net.minecraft.server.packs.PackMetadataResources;
 import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.repository.Pack;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.stream.Stream;
 
 class AddonResourceSupplier implements Pack.ResourcesSupplier {
 
@@ -37,7 +39,7 @@ class AddonResourceSupplier implements Pack.ResourcesSupplier {
     }
 
     @Override
-    public PackResources openPrimary(PackLocationInfo location) {
+    public PackMetadataResources openMetadata(PackLocationInfo location) {
         try {
             return new AddonPackResources(location, jarPath, addonId);
         } catch (IOException e) {
@@ -49,9 +51,12 @@ class AddonResourceSupplier implements Pack.ResourcesSupplier {
     }
 
     @Override
-    public PackResources openFull(PackLocationInfo location, Pack.Metadata metadata) {
+    public Stream<PackResources> openResources(
+            PackLocationInfo location,
+            Pack.Metadata metadata
+    ) {
         try {
-            return new AddonPackResources(location, jarPath, addonId);
+            return Stream.of(new AddonPackResources(location, jarPath, addonId));
         } catch (IOException e) {
             throw new RuntimeException(
                     "Failed to open resources for addon pack " + location.id(),
